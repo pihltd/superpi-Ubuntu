@@ -1,0 +1,12 @@
+- hosts: superpi
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: Add all superpi IP addresses to hosts file
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          192.168.1.220  superpi1
+          192.168.1.224  superpi2
+          192.168.1.223  superpi4
+          192.168.1.222  superpi3

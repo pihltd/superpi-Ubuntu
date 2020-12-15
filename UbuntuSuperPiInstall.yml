@@ -1,0 +1,26 @@
+- hosts: superpi
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: Install packages for superpi
+      apt:
+        pkg:
+          - mc
+          - jq
+          - aria2
+          - arpwatch
+          - dstat
+          - bmon
+          - iftop
+          - wireshark
+          - tshark
+          - mpich
+          - python3-mpi4py
+          - ntpdate
+          - r-base
+          - caca-utils
+          - python3-pip
+          - groovy
+          - cockpit
+        update_cache: yes
+        state: latest

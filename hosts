@@ -1,0 +1,29 @@
+[superpi]
+superpi1 ansible_user=ubuntu
+superpi2 ansible_user=ubuntu
+superpi3 ansible_user=ubuntu
+superpi4 ansible_user=ubuntu
+
+[superpi:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[homeautomation]
+raspberrypi ansible_user=ubuntu
+#192.168.1.243 ansible_user=ubuntu
+
+[homeautomation:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[superpimaster]
+superpi1 ansible_user=ubuntu
+
+[superpimaster:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[superpiworkers]
+superpi2 ansible_user=ubuntu
+superpi3 ansible_user=ubuntu
+superpi4 ansible_user=ubuntu
+
+[superpiworkers:vars]
+ansible_python_interpreter=/usr/bin/python3

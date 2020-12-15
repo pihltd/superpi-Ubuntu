@@ -1,0 +1,11 @@
+- hosts: superpi
+  remote_user: pi
+  become: yes
+  tasks:
+    - name: Reenable SWAP in fstab
+      replace:
+        path: /etc/fstab
+        regexp: '^# (.+?\sswap\s+sw\s+.*)$'
+        replace: '\1'
+    - name: Turn swap on
+      command: swapon -a

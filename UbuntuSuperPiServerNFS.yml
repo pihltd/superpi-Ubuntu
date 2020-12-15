@@ -1,0 +1,45 @@
+- hosts: superpimaster
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: Install nfs kernel packages
+      apt:
+        pkg:
+          - nfs-kernel-server
+    - name: Create usb1 mountpoint
+      file:
+        path: /mnt/usb1
+        state: directory
+        mode: '0755'
+        owner: ubuntu
+        group: ubuntu
+    - name: Create /mnt/usb2 mountpoint
+      file:
+        path: /mnt/usb2
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+    - name: Create /etc/exports
+      file:
+        path: /etc/exports
+        state: touch
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Add export entry to /etc/exports
+      blockinfile:
+        path: /etc/exports
+        block: |
+          /mnt/usb1 192.168.1.0/24(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
+          /mnt/usb2 192.168.1.0/24(rw,all_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)
+    - name: Set up fstab
+      blockinfile:
+        path: /etc/fstab
+        block: |
+          UUID=4A82082582081859 /mnt/usb1 ntfs defaults,nofail 0 0
+          UUID=963E77F33E77CB2F /mnt/usb2 ntfs defaults,nofail 0 0
+    - name: Start nfs-kernel-server
+      systemd:
+        name: nfs-kernel-server
+        state: started
+        masked: no

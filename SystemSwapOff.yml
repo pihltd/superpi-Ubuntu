@@ -1,0 +1,11 @@
+- hosts: superpi
+  remote_user: pi
+  become: yes
+  tasks:
+    - name: Swap off
+      command: swapoff -a
+    - name: Disable swap in fstab
+      replace:
+        path: /etc/fstab
+        regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+        replace: '# \1'

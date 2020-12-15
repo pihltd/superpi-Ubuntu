@@ -1,0 +1,33 @@
+- hosts: superpiworkers
+  remote_user: ubuntu
+  become: 'yes'
+  tasks:
+    - name: NFS Client Install
+      apt:
+        pkg:
+          - nfs-common
+    - name: Create the mountpoint
+      file:
+        path: /mnt/usb1
+        state: directory
+        owner: nobody
+        group: nogroup
+        mode: '0777'
+    - name: Create the second mountpoint
+      file:
+        path: /mnt/usb2
+        state: directory
+        owner: nobody
+        group: nogroup
+        mode: '0777'
+    - name: Edit fstab to use systemd automount
+      blockinfile:
+        path: /etc/fstab
+        block: |
+          superpi1:/mnt/usb1   /mnt/usb1  nfs  defaults,noauto,x-systemd.automount  0 0
+          superpi1:/mnt/usb2   /mnt/usb2  nfs  defaults,noauto,x-systemd.automount  0 0
+    - name: Enable nfs-common
+      systemd:
+        name: nfs-common
+        state: started
+        masked: no
