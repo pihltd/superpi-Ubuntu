@@ -1,0 +1,13 @@
+  
+- hosts: superpi
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: Update hosts file with all superpis
+    - name: Apply the host name
+    - name: Install common packages
+    - name: Create static IP addresses
+      #https://stackoverflow.com/questions/31912748/how-to-run-a-particular-task-on-specific-host-in-ansible
+      #https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+    - name: Set up NFS Server
+    - name: Set up NFS Clients
