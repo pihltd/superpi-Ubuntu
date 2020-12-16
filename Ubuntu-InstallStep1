@@ -1,0 +1,38 @@
+#https://blog.risingstack.com/getting-started-with-ansible-infrastructure-automation/
+- hosts: superpi
+  become: 'yes'
+  vars:
+    - name: "ubuntu"
+      password: "ubuntu"
+  tasks:
+    - name: Change password for ubuntu user
+      user:
+        name: '"{{ item.name }}"'
+        password: '"{{ item.password | password_hash('sha512') }}"'
+    - name: Pull authorized keys file from github
+    #https://www.andrehotzler.de/en/blog/technology/79-distribute-ssh-keys-elegantly-with-ansible.html
+    #https://webworxshop.com/automating-my-infrastructure-with-ansible-and-gitlab-ci-part-3-ssh-keys-and-dotfiles/
+    - name: Disable root SSH access
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#PermitRootLogin prohibit-password'
+        line: PermitRootLogin no
+    - name: Disable SSH password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication yes'
+        line: PasswordAuthentication no
+    - name: Update system
+      apt:
+        upgrade: yes
+        update_cache: yes
+        autoclean: yes
+        autoremove: yes
+    - name: Reboot server
+      reboot:
+        msg: "Ansible Reboot"
+        connect_timeout: 5
+        reboot_timeout: 120
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: whoami
