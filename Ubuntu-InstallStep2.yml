@@ -1,0 +1,47 @@
+  
+- hosts: superpi
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: Update hosts file with all superpis
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          192.168.1.220  superpi1
+          192.168.1.224  superpi2
+          192.168.1.223  superpi4
+          192.168.1.222  superpi3
+    - name: Name superpi1
+      when: "'superpi1' in inventory_hostname"
+      - replace:
+        path: /etc/hosts
+        regexp: "ubuntu"
+        replace: "superpi1"
+        backup: yes
+    - name: Name superpi2
+      when: "'superpi2' in inventory_hostname"
+      - replace:
+        path: /etc/hosts
+        regexp: "ubuntu"
+        replace: "superpi2"
+        backup: yes
+    - name: Name superpi3
+      when: "'superpi3' in inventory_hostname"
+      - replace:
+        path: /etc/hosts
+        regexp: "ubuntu"
+        replace: "superpi3"
+        backup: yes
+    - name: Name superpi4
+      when: "'superpi4' in inventory_hostname"
+      - replace:
+        path: /etc/hosts
+        regexp: "ubuntu"
+        replace: "superpi4"
+        backup: yes
+    - name: Install common packages
+    - name: Create static IP addresses
+      #https://stackoverflow.com/questions/31912748/how-to-run-a-particular-task-on-specific-host-in-ansible
+      #https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+    - name: Set up NFS Server
+    - name: Set up NFS Clients

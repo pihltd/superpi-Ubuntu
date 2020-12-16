@@ -9,7 +9,7 @@
       user:
         name: '"{{ item.name }}"'
         password: '"{{ item.password | password_hash('sha512') }}"'
-    - name: Pull authorized keys file from github
+    - name: ADD ALL SSH KEYS
     #https://www.andrehotzler.de/en/blog/technology/79-distribute-ssh-keys-elegantly-with-ansible.html
     #https://webworxshop.com/automating-my-infrastructure-with-ansible-and-gitlab-ci-part-3-ssh-keys-and-dotfiles/
     - name: Disable root SSH access
