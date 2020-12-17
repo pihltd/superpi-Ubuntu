@@ -40,8 +40,55 @@
         replace: "superpi4"
         backup: yes
     - name: Install common packages
+      apt:
+        pkg:
+          - mc
+          - jq
+          - aria2
+          - aptwatch
+          - dstat
+          - iftop
+          - bmon
+          - wireshark
+          - tshark
+          - mpich
+          - python3-mpi4py
+          - ntpdate
+          - r-base
+          - caca-utils
+          - python3-pip
+          - groovy
+          - cockpit
+        update_cache: yes
+        state: latest
     - name: Create static IP addresses
       #https://stackoverflow.com/questions/31912748/how-to-run-a-particular-task-on-specific-host-in-ansible
       #https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+    - name: Create nanorc file
+      copy:
+        dest: "/home/ubuntu/.nanorc"
+        content: |
+          set autoindent
+          set boldtext
+          set casesensitive
+          set constantshow
+          set linenumbers
+          set smooth
+          set trimblanks
+          include "/usr/share/nano/*.nanorc"
+    - name: Create screenrc file
+      copy:
+        dest: "/home/ubuntu/.screenrc"
+        content: |
+          attrcolor b ".I"
+          termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+          termcapinfo xterm|xterms|xs|rxvt ti@:te@
+          defbce "on"
+          term xterm-256color
+          defscrollback 30000
+          hardstatus alwayslastline
+          hardstatus string '%{= Kd} %{= Kd}%-w%{= Kr}[%{= KW}%n %t%{= Kr}]%{= Kd}%+w %-= %{KG} %H%{KW}|%{KY}%101`%{KW}|%D %M %d %Y%{= Kc} %C%A%{-}'
+          bind f eval "hardstatus ignore"
+          bind F eval "hardstatus alwayslastline"
     - name: Set up NFS Server
     - name: Set up NFS Clients
