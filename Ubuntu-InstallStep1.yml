@@ -12,6 +12,24 @@
     - name: ADD ALL SSH KEYS
     #https://www.andrehotzler.de/en/blog/technology/79-distribute-ssh-keys-elegantly-with-ansible.html
     #https://webworxshop.com/automating-my-infrastructure-with-ansible-and-gitlab-ci-part-3-ssh-keys-and-dotfiles/
+    #https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/
+    - name: Generate SSH keys on superpi1
+      when: "'superpi1' in inventory_hostname"
+      command: ssh-keygen -q -t rsa -f /home/ubuntu/.ssh/id_rsa -C "" -N ""
+      args:
+        creates: /home/ubuntu/.ssh/id_rsa
+    - name: Fetch the public key from superpi1
+      when: "'superpi1' in inventory_hostname"
+      fetch:
+        src: "/home/ubuntu/.ssh/id_rsa.pub"
+        dest: "buffer/superpi1-id_rsa.pub"
+        flat: yes
+    - name: Distribute fetched key to other superpis
+      when: inventory_hostname in groups['superpiworkers']
+      authorized_key:
+        user: ubuntu
+        state: present
+        key: "{{ lookup('file', 'buffer/superpi1-id_rsa.pub') }}"
     - name: Disable root SSH access
       lineinfile:
         path: /etc/ssh/sshd_config
