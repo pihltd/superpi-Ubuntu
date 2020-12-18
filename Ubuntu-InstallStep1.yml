@@ -50,6 +50,11 @@
         path: /etc/ssh/sshd_config
         regexp: '^PasswordAuthentication yes'
         line: PasswordAuthentication no
+    - name: Restrict SSH access to a single user
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^AllowUsers'
+        line: AllowUsers pihl
     - name: Update system
       apt:
         upgrade: yes
