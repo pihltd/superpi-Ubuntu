@@ -1,0 +1,26 @@
+# This file contains a netplan-compatible configuration which cloud-init
+# will apply on first-boot. Please refer to the cloud-init documentation and
+# the netplan reference for full details:
+#
+# https://cloudinit.readthedocs.io/
+# https://netplan.io/reference
+#
+# Some additional examples are commented out below
+#
+#https://raspberrypi.stackexchange.com/questions/111722/rpi-4-running-ubuntu-server-20-04-cant-connect-to-wifi
+#
+
+version: 2
+renderer: networkd
+wifis:
+  wlan0:
+    dhcp4: false
+    dhcp6: false
+    addresses: [192.168.1.224/24]
+    gateway4: 192.168.1.1
+    nameservers:
+      addresses: [192.168.1.1]
+    optional: true
+    access-points:
+      "SSID":
+        password: "PASSWORD"

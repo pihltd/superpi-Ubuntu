@@ -1,0 +1,106 @@
+#cloud-config
+
+# This is the user-data configuration file for cloud-init. By default this sets
+# up an initial user called "ubuntu" with password "ubuntu", which must be
+# changed at first login. However, many additional actions can be initiated on
+# first boot from this file. The cloud-init documentation has more details:
+#
+# https://cloudinit.readthedocs.io/
+#
+# Some additional examples are provided in comments below the default
+# configuration.
+
+# On first boot, set the (default) ubuntu user's password to "ubuntu" and
+# expire user passwords
+chpasswd:
+  expire: true
+  list:
+  - ubuntu:ubuntu
+
+# Enable password authentication with the SSH daemon
+ssh_pwauth: true
+
+## On first boot, use ssh-import-id to give the specific users SSH access to
+## the default user
+#ssh_import_id:
+#- lp:my_launchpad_username
+#- gh:my_github_username
+
+## Add users and groups to the system, and import keys with the ssh-import-id
+## utility
+groups:
+ - pihl: [pihl]
+ - ubuntu: [pihl]
+#- robot: [robot]
+#- robotics: [robot]
+#- pi
+#
+users:
+#- default
+#- name: robot
+#  gecos: Mr. Robot
+#  primary_group: robot
+#  groups: users
+#  ssh_import_id: foobar
+#  lock_passwd: false
+#  passwd: $5$hkui88$nvZgIle31cNpryjRfO9uArF7DYiBcWEnjqq7L1AQNN3
+- name: pihl
+  primary_group: pihl
+  lock_passwd: false
+  passwd: foWg44XTkoBFk
+  ssh-authorized-keys:
+    # JuiceSSH
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxHXiGWOKb1TP0DEfH8VUMbYeGLYJnn8CMu0DTnIkSvygGH7/CL+qV4GazRfPk3TEQUltnbtVGSew8unHXzdgl5+uHYxJw/vTLVJXdz5DnJwmBbkSbrW9B0otzdZoj0CgfCLfoAD09iTGKSwQrm6t9f+PftDiUrXVBAORlF5IpwsOzkIu45OK0X00fSNnas+WLSFtQzpFPkZdtOdg7/uuzck3xcq8A64bj+JkacA9UBR4tm1m+6TB3K4ffwoEByC9fi6t4ucHBewLaUUA80JRwStweM4lZ620xnT+5M3sMlVJXJeTbygfo2dHbuhITe6zqBDKbWKRmO4FhgyHNQPc9
+    # MSI Laptop Ubuntu
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9r1Hgq6laiVD0tki9HhX4XjaqncTIlSWfkuEjaKICTf2svyIXnrndxAfjG/Q1AC2Gy9bTXt/uVNVvytT6sYQ8+GzLcq63QNUUY85hsl2nvFyRiD7WaN0MowC2ypcX5iYvworYZ3CQrcl6svaJ6VOlUrMdleJR4W1r41GsZnC4F4wPpGjk15N6pgI139TOPhTXug2y+4is6DPuQ9k0cx4FKfTw2BlSyRDk4mDtbR+KiCTfrLMdTyykdPmeNLPMgE9EVJCFTAQ7zXnpLGB70uLSozpiR2UUxSCkuCsrZVuESAH6j6AGBOt8mqdwdSj5kBA1CKtPIXhbmZqrhPWopPTy1oSxuiqoRbGdVxSERMXcIr63Nl/BqTJ/KpxLzwGSV3SGRAKrrEc/khL9wvF0IoDuY+zqWl9Nh/FmC//4GXET9U/slGyIL2+tCJyheD2j/CsHoUjVNaSiwteb38LSHoz2WrMfV+NSxZhdvPuJirhsmi+yIr3cbgRLtrqcIMIS1Xk=
+    # LaptopWin10Debian
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgMzMDHPnIUDN+Nuup8ETa7TXDJPZe2ijFmHS0wuC/yYdeXQLCJBcrjCbOl5hQPwJryQ/NbBNHooY/mfQfGNdr0L6/gC9RJzR6UECkZNY0QH5uVEuZ4H8aH2u8TOeL6O8CVUljkXED8QmUHmCVXLlSIySvwsGBEx+5KsfjDW77ZA82JEjrqcMobx3vQlt+LWeVDuZHjWKNKvV61e3Qr3fuAl7iHoNRC9E+hWBiQUEL8ZkxWaWS7DpDq9E17KMRkXGnSVX6XV9acgqOJX8pfMqd2Dr2t+Acq0/bY0Or5juucvq1sgTwUSoulqDy33P9/6yNohQ1nzH8pJpArCE6pb5j
+    # DesktopWin10Debian
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUW74/aVI9NCMpJp3CNDZT7S/UzJaqZlyNGLkbvzmkxR66gL+wy5O8LcP/d4UX67ctI0OD5umq3oeCWDFgfZgc85eYNWq0l3r16iHkZBg3biRvnfL6q/C33pEAUtDNrK/z1XnW5ihuEfMOr7wEpmkxOFQ6RET0/VUeegR8d5JDriRKM8fVwJ9zy6cYnJ5TX4WbY2ukWHTgZ3uO+0hX+9d9uxFteMzldSdBreESb97pMkhpljvSAS1vIff+AtDQ/Bqw5/iknwjPJITDpgbl4giAyeqL5EjY9b73HZI5yfa5zOtii05ES0hHp80MenNHJU+mVswEi+CFUiY4wcT1V4E/
+    # DellXPSDebian
+    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjtbnHBep8+s+1f3dLx4uQbUSQUs1lwxJuqO3a/VldRXZPK4TkotVq0zlb9Rdf+bFpsoLY05gI0Ek2J3Rl7R9kARIr/5gAXMprDNWxOV39CB0XaPkX6VmQoC0J8uHVqAimJAhHb5qGtItM7xfPWzChnpSkbUQAYIGziYrsMrzKWT+SSLpK6Q7awZ5NBAOYxkJKCfNFNoRIOEjWC3Msl8Y5IqrWQG9Ma0SLLXbY8/syFp3DSTD2ED+DSHnEqZM+JTYC0b1iGXYXtwrQsfgWA5mcz8qwOo70pUmbgHXVHszkOAXF4cY8sOU6xtf/Xs8/9oaIbmvYGSRQz3LfkAi8SiRl
+  sudo: ['ALL=(ALL) NOPASSWD:ALL']
+  groups: sudo, ubuntu, pihl
+  shell: /bin/bash
+- name: ubuntu
+  passwd: foWg44XTkoBFk
+  lock_passwd: false
+
+## Update apt database and upgrade packages on first boot
+#package_update: true
+#package_upgrade: true
+
+## Install additional packages on first boot
+#packages:
+#- pwgen
+#- pastebinit
+#- [libpython2.7, 2.7.3-0ubuntu3.1]
+
+## Write arbitrary files to the file-system (including binaries!)
+#write_files:
+#- path: /etc/default/keyboard
+#  content: |
+#    # KEYBOARD configuration file
+#    # Consult the keyboard(5) manual page.
+#    XKBMODEL="pc105"
+#    XKBLAYOUT="gb"
+#    XKBVARIANT=""
+#    XKBOPTIONS="ctrl: nocaps"
+#  permissions: '0644'
+#  owner: root:root
+#- encoding: gzip
+#  path: /usr/bin/hello
+#  content: !!binary |
+#    H4sIAIDb/U8C/1NW1E/KzNMvzuBKTc7IV8hIzcnJVyjPL8pJ4QIA6N+MVxsAAAA=
+#  owner: root:root
+#  permissions: '0755'
+
+## Run arbitrary commands at rc.local like time
+#runcmd:
+#- [ ls, -l, / ]
+#- [ sh, -xc, "echo $(date) ': hello world!'" ]
+#- [ wget, "http://ubuntu.com", -O, /run/mydir/index.html ]
+#
+# TDP:  Reboot after init completes
+power_state:
+  mode: reboot

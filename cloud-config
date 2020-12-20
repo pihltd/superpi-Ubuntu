@@ -1,6 +1,7 @@
 #cloud-config
 users:
-  - name: pihl
+  - name: ubuntu
+    passwd: foWg44XTkoBFk
     ssh-authorized-keys:
       # JuiceSSH
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxHXiGWOKb1TP0DEfH8VUMbYeGLYJnn8CMu0DTnIkSvygGH7/CL+qV4GazRfPk3TEQUltnbtVGSew8unHXzdgl5+uHYxJw/vTLVJXdz5DnJwmBbkSbrW9B0otzdZoj0CgfCLfoAD09iTGKSwQrm6t9f+PftDiUrXVBAORlF5IpwsOzkIu45OK0X00fSNnas+WLSFtQzpFPkZdtOdg7/uuzck3xcq8A64bj+JkacA9UBR4tm1m+6TB3K4ffwoEByC9fi6t4ucHBewLaUUA80JRwStweM4lZ620xnT+5M3sMlVJXJeTbygfo2dHbuhITe6zqBDKbWKRmO4FhgyHNQPc9
@@ -15,3 +16,20 @@ users:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     groups: sudo
     shell: /bin/bash
+  - name: pihl
+    passwd: foWg44XTkoBFk
+    ssh-authorized-keys:
+      # JuiceSSH
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxHXiGWOKb1TP0DEfH8VUMbYeGLYJnn8CMu0DTnIkSvygGH7/CL+qV4GazRfPk3TEQUltnbtVGSew8unHXzdgl5+uHYxJw/vTLVJXdz5DnJwmBbkSbrW9B0otzdZoj0CgfCLfoAD09iTGKSwQrm6t9f+PftDiUrXVBAORlF5IpwsOzkIu45OK0X00fSNnas+WLSFtQzpFPkZdtOdg7/uuzck3xcq8A64bj+JkacA9UBR4tm1m+6TB3K4ffwoEByC9fi6t4ucHBewLaUUA80JRwStweM4lZ620xnT+5M3sMlVJXJeTbygfo2dHbuhITe6zqBDKbWKRmO4FhgyHNQPc9
+      # MSI Laptop Ubuntu
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9r1Hgq6laiVD0tki9HhX4XjaqncTIlSWfkuEjaKICTf2svyIXnrndxAfjG/Q1AC2Gy9bTXt/uVNVvytT6sYQ8+GzLcq63QNUUY85hsl2nvFyRiD7WaN0MowC2ypcX5iYvworYZ3CQrcl6svaJ6VOlUrMdleJR4W1r41GsZnC4F4wPpGjk15N6pgI139TOPhTXug2y+4is6DPuQ9k0cx4FKfTw2BlSyRDk4mDtbR+KiCTfrLMdTyykdPmeNLPMgE9EVJCFTAQ7zXnpLGB70uLSozpiR2UUxSCkuCsrZVuESAH6j6AGBOt8mqdwdSj5kBA1CKtPIXhbmZqrhPWopPTy1oSxuiqoRbGdVxSERMXcIr63Nl/BqTJ/KpxLzwGSV3SGRAKrrEc/khL9wvF0IoDuY+zqWl9Nh/FmC//4GXET9U/slGyIL2+tCJyheD2j/CsHoUjVNaSiwteb38LSHoz2WrMfV+NSxZhdvPuJirhsmi+yIr3cbgRLtrqcIMIS1Xk=
+      # LaptopWin10Debian
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDgMzMDHPnIUDN+Nuup8ETa7TXDJPZe2ijFmHS0wuC/yYdeXQLCJBcrjCbOl5hQPwJryQ/NbBNHooY/mfQfGNdr0L6/gC9RJzR6UECkZNY0QH5uVEuZ4H8aH2u8TOeL6O8CVUljkXED8QmUHmCVXLlSIySvwsGBEx+5KsfjDW77ZA82JEjrqcMobx3vQlt+LWeVDuZHjWKNKvV61e3Qr3fuAl7iHoNRC9E+hWBiQUEL8ZkxWaWS7DpDq9E17KMRkXGnSVX6XV9acgqOJX8pfMqd2Dr2t+Acq0/bY0Or5juucvq1sgTwUSoulqDy33P9/6yNohQ1nzH8pJpArCE6pb5j
+      # DesktopWin10Debian
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUW74/aVI9NCMpJp3CNDZT7S/UzJaqZlyNGLkbvzmkxR66gL+wy5O8LcP/d4UX67ctI0OD5umq3oeCWDFgfZgc85eYNWq0l3r16iHkZBg3biRvnfL6q/C33pEAUtDNrK/z1XnW5ihuEfMOr7wEpmkxOFQ6RET0/VUeegR8d5JDriRKM8fVwJ9zy6cYnJ5TX4WbY2ukWHTgZ3uO+0hX+9d9uxFteMzldSdBreESb97pMkhpljvSAS1vIff+AtDQ/Bqw5/iknwjPJITDpgbl4giAyeqL5EjY9b73HZI5yfa5zOtii05ES0hHp80MenNHJU+mVswEi+CFUiY4wcT1V4E/
+      # DellXPSDebian
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjtbnHBep8+s+1f3dLx4uQbUSQUs1lwxJuqO3a/VldRXZPK4TkotVq0zlb9Rdf+bFpsoLY05gI0Ek2J3Rl7R9kARIr/5gAXMprDNWxOV39CB0XaPkX6VmQoC0J8uHVqAimJAhHb5qGtItM7xfPWzChnpSkbUQAYIGziYrsMrzKWT+SSLpK6Q7awZ5NBAOYxkJKCfNFNoRIOEjWC3Msl8Y5IqrWQG9Ma0SLLXbY8/syFp3DSTD2ED+DSHnEqZM+JTYC0b1iGXYXtwrQsfgWA5mcz8qwOo70pUmbgHXVHszkOAXF4cY8sOU6xtf/Xs8/9oaIbmvYGSRQz3LfkAi8SiRl
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash  
+  

@@ -1,6 +1,6 @@
   
 - hosts: superpi
-  remote_user: ubuntu
+  remote_user: pihl
   become: yes
   tasks:
     - name: Update hosts file with all superpis
