@@ -61,12 +61,11 @@
           - cockpit
         update_cache: yes
         state: latest
-    - name: Create static IP addresses
-      #https://stackoverflow.com/questions/31912748/how-to-run-a-particular-task-on-specific-host-in-ansible
-      #https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
+    # https://stackoverflow.com/questions/31912748/how-to-run-a-particular-task-on-specific-host-in-ansible
+    # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html
     - name: Create nanorc file
       copy:
-        dest: "/home/ubuntu/.nanorc"
+        dest: "/home/pihl/.nanorc"
         content: |
           set autoindent
           set boldtext
@@ -78,7 +77,7 @@
           include "/usr/share/nano/*.nanorc"
     - name: Create screenrc file
       copy:
-        dest: "/home/ubuntu/.screenrc"
+        dest: "/home/pihl/.screenrc"
         content: |
           attrcolor b ".I"
           termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
@@ -95,15 +94,15 @@
         path: /mnt/usb1
         state: directory
         mode: '0755'
-        owner: ubuntu
-        group: ubuntu
+        owner: pihl
+        group: pihl
     - name: Create usb2 mountpoint
       file:
         path: /mnt/usb2
         state: directory
         mode: '0755'
-        owner: ubuntu
-        group: ubuntu
+        owner: pihl
+        group: pihl
     - name: Install packages for NFS Server
       when: inventory_hostname in groups['superpimaster']
       apt:
