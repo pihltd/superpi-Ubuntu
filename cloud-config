@@ -1,4 +1,5 @@
 #cloud-config
+#DO NOT USE THIS FILE!  USE user-data
 users:
   - name: ubuntu
     passwd: foWg44XTkoBFk

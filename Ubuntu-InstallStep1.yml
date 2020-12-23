@@ -8,19 +8,20 @@
     #https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/
     - name: Generate SSH keys on superpi1
       when: "'superpi1' in inventory_hostname"
-      command: ssh-keygen -q -t rsa -f /home/ubuntu/.ssh/id_rsa -C "" -N ""
+      command: ssh-keygen -q -t rsa -f /home/pihl/.ssh/id_rsa -C "" -N ""
       args:
-        creates: /home/ubuntu/.ssh/id_rsa
+        creates: /home/pihl/.ssh/id_rsa
+    #Need to chown the keys after creation this has them owned by root
     - name: Fetch the public key from superpi1
       when: "'superpi1' in inventory_hostname"
       fetch:
-        src: "/home/ubuntu/.ssh/id_rsa.pub"
+        src: "/home/pihl/.ssh/id_rsa.pub"
         dest: "buffer/superpi1-id_rsa.pub"
         flat: yes
     - name: Distribute fetched key to other superpis
       when: inventory_hostname in groups['superpiworkers']
       authorized_key:
-        user: ubuntu
+        user: pihl
         state: present
         key: "{{ lookup('file', 'buffer/superpi1-id_rsa.pub') }}"
     - name: Disable root SSH access

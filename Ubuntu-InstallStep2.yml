@@ -1,4 +1,3 @@
-  
 - hosts: superpi
   remote_user: pihl
   become: yes
@@ -13,29 +12,29 @@
           192.168.1.222  superpi3
     - name: Name superpi1
       when: "'superpi1' in inventory_hostname"
-      - replace:
-        path: /etc/hosts
+      replace:
+        path: /etc/hostname
         regexp: "ubuntu"
         replace: "superpi1"
         backup: yes
     - name: Name superpi2
       when: "'superpi2' in inventory_hostname"
-      - replace:
-        path: /etc/hosts
+      replace:
+        path: /etc/hostname
         regexp: "ubuntu"
         replace: "superpi2"
         backup: yes
     - name: Name superpi3
       when: "'superpi3' in inventory_hostname"
-      - replace:
-        path: /etc/hosts
+      replace:
+        path: /etc/hostname
         regexp: "ubuntu"
         replace: "superpi3"
         backup: yes
     - name: Name superpi4
       when: "'superpi4' in inventory_hostname"
-      - replace:
-        path: /etc/hosts
+      replace:
+        path: /etc/hostname
         regexp: "ubuntu"
         replace: "superpi4"
         backup: yes
@@ -45,7 +44,7 @@
           - mc
           - jq
           - aria2
-          - aptwatch
+          - arpwatch
           - dstat
           - iftop
           - bmon
@@ -110,7 +109,7 @@
           - nfs-kernel-server
     - name: Create exports file
       when: inventory_hostname in groups['superpimaster']
-        file:
+      file:
         path: /etc/exports
         state: touch
         owner: root
